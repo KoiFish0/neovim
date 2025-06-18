@@ -27,3 +27,7 @@ vim.keymap.set("n", "<leader>e", function() harpoon:list():next() end)
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader><Space>", builtin.find_files, {})
 vim.keymap.set("n", "<leader>g", builtin.live_grep, {})
+
+-- Remaps
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
