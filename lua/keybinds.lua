@@ -29,5 +29,12 @@ vim.keymap.set("n", "<leader><Space>", builtin.find_files, {})
 vim.keymap.set("n", "<leader>g", builtin.live_grep, {})
 
 -- Remaps
+-- Center screen when using some motions
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
+
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
+
+-- Open file explorer
+vim.keymap.set("n", "<leader>e", ":Ex<CR>")
