@@ -28,7 +28,7 @@ local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader><Space>", builtin.find_files, {})
 vim.keymap.set("n", "<leader>g", builtin.live_grep, {})
 
--- Remaps
+-- Remaps -- 
 
 -- Center screen when using some motions
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
@@ -40,6 +40,5 @@ vim.keymap.set("n", "N", "Nzzzv")
 -- Open file explorer
 vim.keymap.set("n", "<leader>e", ":Ex<CR>")
 
-vim.keymap.set("x", "<leader>p", "\"_d")
-
-
+-- Less finger movement
+vim.keymap.set("n", "dD", "d$")
