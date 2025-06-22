@@ -42,3 +42,4 @@ vim.keymap.set("n", "<leader>e", ":Ex<CR>")
 
 -- Less finger movement
 vim.keymap.set("n", "dD", "d$")
+vim.keymap.set("n", "cC", "c$")
