@@ -32,7 +32,7 @@ vim.keymap.set("n", "<leader>g", builtin.live_grep, {})
 vim.keymap.set("n", "<leader>zz", function()
     require("zen-mode").setup {
         window = {
-            width = 150,
+            width = 120,
             options = { }
         },
     }
