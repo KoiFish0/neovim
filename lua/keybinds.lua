@@ -41,5 +41,10 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "<leader>e", ":Ex<CR>")
 
 -- Less finger movement
-vim.keymap.set("n", "dD", "d$")
 vim.keymap.set("n", "cC", "c$")
+vim.keymap.set("n", "dD", "d$")
+vim.keymap.set("n", "yY", "y$")
+
+-- Splits
+vim.keymap.set("n", "-", ":sp<CR>")
+vim.keymap.set("n", "|", ":vsp<CR>")
