@@ -52,6 +52,8 @@ vim.keymap.set("n", "N", "Nzzzv")
 
 -- Open file explorer
 vim.keymap.set("n", "<leader>e", ":Ex<CR>")
+-- Open terminal
+vim.keymap.set("n", "<leader>t", ":tab term")
 
 -- Less finger movement
 vim.keymap.set("n", "cC", "c$")
