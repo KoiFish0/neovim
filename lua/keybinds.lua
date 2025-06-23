@@ -28,8 +28,21 @@ local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader><Space>", builtin.find_files, {})
 vim.keymap.set("n", "<leader>g", builtin.live_grep, {})
 
--- Remaps -- 
+-- Zen-mode
+vim.keymap.set("n", "<leader>zz", function()
+    require("zen-mode").setup {
+        window = {
+            width = 150,
+            options = { }
+        },
+    }
+    require("zen-mode").toggle()
+    vim.wo.wrap = false
+    vim.wo.number = true
+    vim.wo.rnu = true
+end)
 
+-- Remaps -- 
 -- Center screen when using some motions
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
