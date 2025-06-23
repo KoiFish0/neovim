@@ -53,7 +53,7 @@ vim.keymap.set("n", "N", "Nzzzv")
 -- Open file explorer
 vim.keymap.set("n", "<leader>e", ":Ex<CR>")
 -- Open terminal
-vim.keymap.set("n", "<leader>t", ":tab term")
+vim.keymap.set("n", "<leader>t", ":tab term<CR>")
 
 -- Less finger movement
 vim.keymap.set("n", "cC", "c$")
