@@ -43,6 +43,10 @@ vim.keymap.set("n", "<leader>zz", function()
 end)
 
 -- Remaps -- 
+
+-- Replace things without losing yank/paste register
+vim.keymap.set({"n", "x"}, "<leader>p", [["_dP]])
+
 -- Center screen when using some motions
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
