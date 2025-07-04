@@ -47,13 +47,16 @@ end)
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
+vim.keymap.set("v", "<C-d>", "<C-d>zz")
+vim.keymap.set("v", "<C-u>", "<C-u>zz")
+
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 -- Open file explorer
 vim.keymap.set("n", "<leader>e", ":Ex<CR>")
 -- Open terminal
-vim.keymap.set("n", "<leader>t", ":tab term<CR>")
+vim.keymap.set("n", "<leader>t", ":tab term<CR>i")
 
 -- Less finger movement
 vim.keymap.set("n", "cC", "c$")
@@ -63,3 +66,10 @@ vim.keymap.set("n", "yY", "y$")
 -- Splits
 vim.keymap.set("n", "-", ":sp<CR>")
 vim.keymap.set("n", "|", ":vsp<CR>")
+
+-- Case-insensitive commands
+-- Probably a better way to do this
+vim.api.nvim_create_user_command("W", "w", {})
+vim.api.nvim_create_user_command("Q", "q", {})
+vim.api.nvim_create_user_command("Wq", "wq", {})
+vim.api.nvim_create_user_command("Qa", "qa", {})
