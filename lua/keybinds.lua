@@ -126,6 +126,9 @@ vim.keymap.set("n", "yY", "y$")
 vim.keymap.set("n", "-", ":sp<CR>")
 vim.keymap.set("n", "|", ":vsp<CR>")
 
+-- Formatting
+vim.keymap.set("n", "Q", "gqq")
+
 -- Case-insensitive commands
 -- Probably a better way to do this
 vim.api.nvim_create_user_command("W", "w", {})
