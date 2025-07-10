@@ -29,20 +29,6 @@ local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader><Space>", builtin.find_files, {})
 vim.keymap.set("n", "<leader>G", builtin.live_grep, {})
 
--- Zen-mode
-vim.keymap.set("n", "<leader>zz", function()
-    require("zen-mode").setup {
-        window = {
-            width = 120,
-            options = { }
-        },
-    }
-    require("zen-mode").toggle()
-    vim.wo.wrap = false
-    vim.wo.number = true
-    vim.wo.rnu = true
-end)
-
 -- LSP
 
 -- Set keybinds when an LSP server attaches to a buffer
