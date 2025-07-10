@@ -13,11 +13,11 @@ return {
     config = function()
       -- Disable all diagnostic visuals
       vim.diagnostic.config({
-        virtual_text = false, -- No inline diagnostic text
-        signs = false, -- No gutter signs
-        underline = false, -- No underlines for diagnostics
-        update_in_insert = false, -- No diagnostics in insert mode
-        float = { border = "none" }, -- No borders for any diagnostic float
+        virtual_text = true, -- Inline diagnostic text
+        signs = false, -- Gutter signs
+        underline = true, -- Underlines for diagnostics
+        update_in_insert = false, -- Diagnostics in insert mode
+        float = { border = "none" }, -- Borders for any diagnostic float
       })
 
       require("mason-lspconfig").setup({
@@ -27,9 +27,13 @@ return {
 
       -- Default handler for LSP servers
       local lspconfig = require("lspconfig")
+      -- Attach LSP capabilities for autocomplete
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
       require("mason-lspconfig").setup_handlers({
         function(server_name)
-          lspconfig[server_name].setup({})
+          lspconfig[server_name].setup({
+            capabilities = capabilities, -- Enable autocomplete capabilities
+          })
         end,
       })
 
@@ -51,7 +55,9 @@ return {
             vim.notify("Installing LSP server for " .. filetype .. ": " .. server_name, vim.log.levels.INFO)
             vim.fn.system({ "MasonInstall", server_name })
             vim.schedule(function()
-              lspconfig[server_name].setup({})
+              lspconfig[server_name].setup({
+                capabilities = capabilities, -- Enable autocomplete for new servers
+              })
               vim.notify("LSP server " .. server_name .. " installed and configured", vim.log.levels.INFO)
             end)
           end
@@ -63,5 +69,58 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
+  },
+  -- Autocomplete with nvim-cmp
+  {
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp", -- LSP source for nvim-cmp
+      "hrsh7th/cmp-buffer", -- Buffer completions
+      "hrsh7th/cmp-path", -- Path completions
+      "hrsh7th/cmp-cmdline", -- Cmdline completions
+      "L3MON4D3/LuaSnip", -- Snippet engine
+      "saadparwaiz1/cmp_luasnip", -- Snippet completions
+    },
+    config = function()
+      local cmp = require("cmp")
+      local luasnip = require("luasnip")
+
+      cmp.setup({
+        snippet = {
+          expand = function(args)
+            luasnip.lsp_expand(args.body) -- For LuaSnip snippet expansion
+          end,
+        },
+        mapping = cmp.mapping.preset.insert({
+          ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+          ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+          ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+          ["<C-Space>"] = cmp.mapping.complete(),
+        }),
+        sources = cmp.config.sources({
+          { name = "nvim_lsp" }, -- LSP completions
+          { name = "luasnip" }, -- Snippet completions
+          { name = "buffer" }, -- Buffer completions
+          { name = "path" }, -- Path completions
+        }),
+      })
+
+      -- Setup cmdline completion
+      cmp.setup.cmdline(":", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = "path" },
+          { name = "cmdline" },
+        }),
+      })
+
+      -- Setup search completion
+      cmp.setup.cmdline("/", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = "buffer" },
+        },
+      })
+    end,
   },
 }

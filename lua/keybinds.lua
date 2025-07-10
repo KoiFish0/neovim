@@ -37,49 +37,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     local bufnr = args.buf
 
-    -- Go to definition
-    map("n", "<leader>gd", vim.lsp.buf.definition, vim.tbl_extend("force", opts, { buffer = bufnr, desc = "Go to definition" }))
-
-    -- Go to declaration
-    map("n", "<leader>gD", vim.lsp.buf.declaration, vim.tbl_extend("force", opts, { buffer = bufnr, desc = "Go to declaration" }))
-
-    -- Go to implementation
-    map("n", "<leader>gi", vim.lsp.buf.implementation, vim.tbl_extend("force", opts, { buffer = bufnr, desc = "Go to implementation" }))
-
-    -- Go to type definition
-    map("n", "<leader>gt", vim.lsp.buf.type_definition, vim.tbl_extend("force", opts, { buffer = bufnr, desc = "Go to type definition" }))
-
-    -- Show hover information
+    map("n", "gd", vim.lsp.buf.definition, vim.tbl_extend("force", opts, { buffer = bufnr, desc = "Go to definition" }))
     map("n", "K", vim.lsp.buf.hover, vim.tbl_extend("force", opts, { buffer = bufnr, desc = "Show hover documentation" }))
-
-    -- Show signature help
-    map("i", "<C-k>", vim.lsp.buf.signature_help, vim.tbl_extend("force", opts, { buffer = bufnr, desc = "Show signature help" }))
-
-    -- Find references
-    map("n", "<leader>gr", vim.lsp.buf.references, vim.tbl_extend("force", opts, { buffer = bufnr, desc = "Find references" }))
-
-    -- Rename symbol
-    map("n", "<leader>rn", vim.lsp.buf.rename, vim.tbl_extend("force", opts, { buffer = bufnr, desc = "Rename symbol" }))
-
-    -- Code action
-    map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, vim.tbl_extend("force", opts, { buffer = bufnr, desc = "Code action" }))
-
-    -- Format buffer
-    map("n", "<leader>f", function()
-      vim.lsp.buf.format({ async = true })
-    end, vim.tbl_extend("force", opts, { buffer = bufnr, desc = "Format buffer" }))
-
-    -- Show diagnostics for the current line
     map("n", "<leader>d", vim.diagnostic.open_float, vim.tbl_extend("force", opts, { buffer = bufnr, desc = "Show diagnostics" }))
-
-    -- Go to next diagnostic
     map("n", "]d", vim.diagnostic.goto_next, vim.tbl_extend("force", opts, { buffer = bufnr, desc = "Next diagnostic" }))
-
-    -- Go to previous diagnostic
     map("n", "[d", vim.diagnostic.goto_prev, vim.tbl_extend("force", opts, { buffer = bufnr, desc = "Previous diagnostic" }))
-
-    -- Show diagnostic under cursor
-    map("n", "<leader>e", vim.diagnostic.open_float, vim.tbl_extend("force", opts, { buffer = bufnr, desc = "Show diagnostic under cursor" }))
+    map("n", "<leader>rr", vim.lsp.buf.references, vim.tbl_extend("force", opts, { buffer = bufnr, desc = "Find references" }))
+    map("n", "<leader>rn", vim.lsp.buf.rename, vim.tbl_extend("force", opts, { buffer = bufnr, desc = "Rename symbol" }))
+    map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, vim.tbl_extend("force", opts, { buffer = bufnr, desc = "Code action" }))
+    map("i", "<C-h>", vim.lsp.buf.signature_help, vim.tbl_extend("force", opts, { buffer = bufnr, desc = "Show signature help" }))
   end,
 })
 
