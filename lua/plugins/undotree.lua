@@ -4,7 +4,7 @@ return {
   config = function()
     require("undotree").setup({
       float_diff = true,  -- Show diff in a floating window
-      layout = "left_bottom",  -- Window layout style
+      layout = "right_bottom",  -- Window layout style
       ignore_filetype = { "undotree", "undotreeDiff" },  -- Filetypes to ignore
       window = {
         winblend = 30,  -- Transparency for the window
