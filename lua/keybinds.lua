@@ -2,32 +2,32 @@ local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
 -- Tmux 
-vim.keymap.set("n", "<c-h>", "<cmd>:TmuxNavigateLeft<cr>")
-vim.keymap.set("n", "<c-j>", "<cmd>:TmuxNavigateDown<cr>")
-vim.keymap.set("n", "<c-k>", "<cmd>:TmuxNavigateUp<cr>")
-vim.keymap.set("n", "<c-l>", "<cmd>:TmuxNavigateRight<cr>")
-vim.keymap.set("n", "<c-\\>", "<cmd>:TmuxNavigatePrevious<cr>")
+map("n", "<c-h>", "<cmd>:TmuxNavigateLeft<cr>")
+map("n", "<c-j>", "<cmd>:TmuxNavigateDown<cr>")
+map("n", "<c-k>", "<cmd>:TmuxNavigateUp<cr>")
+map("n", "<c-l>", "<cmd>:TmuxNavigateRight<cr>")
+map("n", "<c-\\>", "<cmd>:TmuxNavigatePrevious<cr>")
 
 -- Harpoon
 local harpoon = require("harpoon")
 
 harpoon:setup()
 
-vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
-vim.keymap.set("n", "<leader>f", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+map("n", "<leader>a", function() harpoon:list():add() end)
+map("n", "<leader>f", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
 
-vim.keymap.set("n", "<leader>1", function() harpoon:list():select(1) end)
-vim.keymap.set("n", "<leader>2", function() harpoon:list():select(2) end)
-vim.keymap.set("n", "<leader>3", function() harpoon:list():select(3) end)
-vim.keymap.set("n", "<leader>4", function() harpoon:list():select(4) end)
+map("n", "<leader>1", function() harpoon:list():select(1) end)
+map("n", "<leader>2", function() harpoon:list():select(2) end)
+map("n", "<leader>3", function() harpoon:list():select(3) end)
+map("n", "<leader>4", function() harpoon:list():select(4) end)
 
-vim.keymap.set("n", "<leader>q", function() harpoon:list():prev() end)
-vim.keymap.set("n", "<leader>e", function() harpoon:list():next() end)
+map("n", "<leader>q", function() harpoon:list():prev() end)
+map("n", "<leader>e", function() harpoon:list():next() end)
 
 -- Telescope
 local builtin = require("telescope.builtin")
-vim.keymap.set("n", "<leader><Space>", builtin.find_files, {})
-vim.keymap.set("n", "<leader>G", builtin.live_grep, {})
+map("n", "<leader><Space>", builtin.find_files, {})
+map("n", "<leader>G", builtin.live_grep, {})
 
 -- LSP
 
@@ -52,38 +52,47 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- Remaps -- 
 
 -- Replace things without losing yank/paste register
-vim.keymap.set({"n", "x"}, "<leader>p", [["_dP]])
+map({"n", "x"}, "<leader>p", [["_dP]])
 
 -- Center screen when using some motions
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
+map("n", "<C-d>", "<C-d>zz")
+map("n", "<C-u>", "<C-u>zz")
 
-vim.keymap.set("v", "<C-d>", "<C-d>zz")
-vim.keymap.set("v", "<C-u>", "<C-u>zz")
+map("v", "<C-d>", "<C-d>zz")
+map("v", "<C-u>", "<C-u>zz")
 
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
+map("n", "n", "nzzzv")
+map("n", "N", "Nzzzv")
 
 -- Open file explorer
-vim.keymap.set("n", "<leader>e", ":Ex<CR>")
+map("n", "<leader>e", ":Ex<CR>")
 -- Open terminal
-vim.keymap.set("n", "<leader>t", ":tab term<CR>i")
+map("n", "<leader>t", ":tab term<CR>i")
 
 -- Less finger movement
-vim.keymap.set("n", "cC", "c$")
-vim.keymap.set("n", "dD", "d$")
-vim.keymap.set("n", "yY", "y$")
+map("n", "cC", "c$")
+map("n", "dD", "d$")
+map("n", "yY", "y$")
 
 -- Splits
-vim.keymap.set("n", "-", ":sp<CR>")
-vim.keymap.set("n", "|", ":vsp<CR>")
+map("n", "-", ":sp<CR>")
+map("n", "|", ":vsp<CR>")
 
--- Formatting
-vim.keymap.set("n", "Q", "gqq")
+-- Move selected text around
+map("v", "J", ":m '>+1<CR>gv=gv")
+map("v", "K", ":m '<-2<CR>gv=gv")
 
--- Case-insensitive commands
--- Probably a better way to do this
-vim.api.nvim_create_user_command("W", "w", {})
-vim.api.nvim_create_user_command("Q", "q", {})
-vim.api.nvim_create_user_command("Wq", "wq", {})
-vim.api.nvim_create_user_command("Qa", "qa", {})
+-- Keep cursor location
+map("n", "J", "mzJ`z")
+
+-- Keep paste buffer
+map("n", "<leader>p", "\"_dP")
+
+-- Make executable
+map("n", "<leader>x", "<cmd>!chmod +x %<CR><CR>")
+
+-- Create a comment (C/C++)
+map("n", "<leader>cm", "o/*<Space>*/<Esc>bi")
+
+-- Create a comment block (C/C++)
+map("n", "<leader>cb", "o/**<Space>*/<Esc>bi<CR><CR><BS><BS><Esc>kwa<Space>")
