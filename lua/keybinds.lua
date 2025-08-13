@@ -27,7 +27,7 @@ map("n", "<leader>e", function() harpoon:list():next() end)
 -- Telescope
 local builtin = require("telescope.builtin")
 map("n", "<leader><Space>", builtin.find_files, {})
-map("n", "<leader>G", builtin.live_grep, {})
+map("n", "<leader>g", builtin.live_grep, {})
 
 -- LSP
 
@@ -95,4 +95,4 @@ map("n", "<leader>x", "<cmd>!chmod +x %<CR><CR>")
 map("n", "<leader>cm", "o/*<Space>*/<Esc>bi")
 
 -- Create a comment block (C/C++)
-map("n", "<leader>cb", "o/**<Space>*/<Esc>bi<CR><CR><BS><BS><Esc>kwa<Space>")
+map("n", "<leader>cb", "o/*<Space>*/<Esc>bi<CR><CR><BS><BS><Esc>kwa<Space>")
