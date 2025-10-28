@@ -4,9 +4,9 @@ vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
 vim.opt.mouse = '' -- Who the hell needs a mouse
 
 -- Tab
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 2
+vim.opt.tabstop = 8
+vim.opt.softtabstop = 8
+vim.opt.shiftwidth = 8
 vim.opt.expandtab = true
 
 -- UI config
